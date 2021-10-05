@@ -15,8 +15,3 @@ Getting started:
 - Manifest:         ```terraform apply -auto-approve```
 - Destroy stack:    ```terraform destroy```
 
-
-
-
-
-
