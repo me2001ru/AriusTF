@@ -18,7 +18,7 @@ variable "flavor_name" {
 
 variable "key_name" {
   type    = string
-  default = "micke"
+  default = "Adminserver"
 }
 
 variable "network_name" {
@@ -48,7 +48,7 @@ variable "port_ip" {
 
 variable "router_id" {
   type    = string
-  default = "71b2edab-5000-43da-b191-d572f1bc22b3"
+  default = "8bc92d1c-b539-465d-83b5-c2873d4c7168"
 }
 
 variable "fip_pool" {

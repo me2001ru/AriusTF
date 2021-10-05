@@ -1,11 +1,11 @@
 ## PROVIDER
 # Configure the OpenStack Provider
 provider "openstack" {
-  #user_name          = "" # use $OS_USERNAME
-  #tenant_name        = "" # use $OS_PROJECT_NAME
-  #tenant_id          = "" # use $OS_PROJECT_ID
-  #password           = "" # use $OS_PASSWORD
-  #auth_url           = "" # use $OS_AUTH_URL
+  user_name          = "anders.sorlin@yh.nackademin.se"
+  #tenant_name        = "anders"
+  tenant_id          = "5b9807a78af2489290b87c6680d226df"
+  password           = "Läroverksvägen29F" 
+  auth_url           = "https://ops.elastx.cloud:5000"
   #region             = "" # use $OS_REGION_NAME
 }
 
@@ -19,7 +19,7 @@ resource "openstack_networking_network_v2" "network_1" {
 # Create subnet
 resource "openstack_networking_subnet_v2" "subnet_1" {
   name            = var.subnet_name
-  network_id      = openstack_networking_network_v2.network_1.id
+  network_id      = "${openstack_networking_network_v2.network_1.id}"
   cidr            = var.subnet_cidr
   ip_version      = 4
   dns_nameservers = var.dns_ip
@@ -69,11 +69,17 @@ resource "openstack_networking_port_v2" "port_1" {
     ip_address = var.port_ip
   }
 }
+# Create Router
+resource "openstack_networking_router_v2" "router_1" {
+  name                = "my_router"
+  admin_state_up      = true
+  tenant_id = "5b9807a78af2489290b87c6680d226df"
+}
 
 # Connect the subnet to the router
 resource "openstack_networking_router_interface_v2" "router_interface_1" {
-  router_id = var.router_id
-  subnet_id = openstack_networking_subnet_v2.subnet_1.id
+  router_id = "${openstack_networking_router_v2.router_1.id}"
+  subnet_id = "${openstack_networking_subnet_v2.subnet_1.id}"
 }
 
 # Allocate Floating IP
@@ -97,7 +103,7 @@ resource "openstack_compute_instance_v2" "instance_1" {
 }
 
 # Associate Floating IP
-resource "openstack_networking_floatingip_associate_v2" "fip_1" {
-  floating_ip = openstack_networking_floatingip_v2.floatip_1.address
-  port_id     = openstack_networking_port_v2.port_1.id
-}
+#resource "openstack_networking_floatingip_associate_v2" "fip_1" {
+#  floating_ip = openstack_networking_floatingip_v2.floatip_1.address
+#  port_id     = openstack_networking_port_v2.port_1.id
+#}
