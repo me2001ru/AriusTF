@@ -9,14 +9,13 @@ provider "openstack" {
   #region             = "" # use $OS_REGION_NAME
 }
 
-## NETWORK
 # Create network
 resource "openstack_networking_network_v2" "network_1" {
   name           = var.network_name
   admin_state_up = "true"
 }
 
-# Create subnet
+# Create subnets
 resource "openstack_networking_subnet_v2" "subnet_1" {
   name            = var.subnet_name
   network_id      = openstack_networking_network_v2.network_1.id
@@ -25,10 +24,36 @@ resource "openstack_networking_subnet_v2" "subnet_1" {
   dns_nameservers = var.dns_ip
 }
 
-# Create Security Groups
+resource "openstack_networking_subnet_v2" "subnet_2" {
+  name            = var.subnet_name_2
+  network_id      = openstack_networking_network_v2.network_1.id
+  cidr            = var.subnet_cidr_2
+  ip_version      = 4
+  dns_nameservers = var.dns_ip
+}
+
+resource "openstack_networking_subnet_v2" "subnet_3" {
+  name            = var.subnet_name_3
+  network_id      = openstack_networking_network_v2.network_1.id
+  cidr            = var.subnet_cidr_3
+  ip_version      = 4
+  dns_nameservers = var.dns_ip
+}
+
+resource "openstack_networking_subnet_v2" "subnet_4" {
+  name            = var.subnet_name_4
+  network_id      = openstack_networking_network_v2.network_1.id
+  cidr            = var.subnet_cidr_4
+  ip_version      = 4
+  dns_nameservers = var.dns_ip
+}
+
+#Set port
+
+#Set Security-group
 resource "openstack_compute_secgroup_v2" "secgroup_1" {
-  name        = "TerraformSG"
-  description = "Terraform SG for Port 80 and 443"
+  name        = "TerraformHTTP(S)"
+  description = "Set Port http and https"
 
   rule {
     from_port   = 80
@@ -47,57 +72,43 @@ resource "openstack_compute_secgroup_v2" "secgroup_1" {
 
 resource "openstack_compute_secgroup_v2" "secgroup_2" {
   name        = "TerraformSSH"
-  description = "Terraform SH for Port 22"
+  description = "SSH "
 
   rule {
     from_port   = 22
     to_port     = 22
     ip_protocol = "tcp"
-    cidr        = "0.0.0.0/0" # only for demo purposes, tighten up in live scenario
+    cidr        = "0.0.0.0/0" # change this to appropriate allowed ip's.
   }
 }
 
-# Create a port
-resource "openstack_networking_port_v2" "port_1" {
-  name               = "port_1"
-  network_id         = openstack_networking_network_v2.network_1.id
-  admin_state_up     = "true"
-  security_group_ids = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
-
-  fixed_ip {
-    subnet_id  = openstack_networking_subnet_v2.subnet_1.id
-    ip_address = var.port_ip
-  }
+#Create a router
+resource "openstack_networking_router_v2" "router_1" {
+  name                = "Magic_Box"
+  admin_state_up      = "true"
+  external_network_id = "600b8501-78cb-4155-9c9f-23dfcba88828" # connects to external interface
 }
 
-# Connect the subnet to the router
+#routers first interface connected to subnet_1
 resource "openstack_networking_router_interface_v2" "router_interface_1" {
-  router_id = var.router_id
+  router_id = openstack_networking_router_v2.router_1.id
   subnet_id = openstack_networking_subnet_v2.subnet_1.id
 }
 
-# Allocate Floating IP
-resource "openstack_networking_floatingip_v2" "floatip_1" {
-  pool = var.fip_pool
+#routers second interface connected to subnet_2
+resource "openstack_networking_router_interface_v2" "router_interface_2" {
+  router_id = openstack_networking_router_v2.router_1.id
+  subnet_id = openstack_networking_subnet_v2.subnet_2.id
 }
 
-## INSTANCE
-# Create an instance
-resource "openstack_compute_instance_v2" "instance_1" {
-  name            = var.instance_name
-  image_name      = var.image_name
-  flavor_name     = var.flavor_name
-  key_pair        = var.key_name
-  security_groups = ["default", "${openstack_compute_secgroup_v2.secgroup_1.name}", "${openstack_compute_secgroup_v2.secgroup_2.name}"]
-  user_data       = var.cloudconfig_web
-
-  network {
-    port = openstack_networking_port_v2.port_1.id
-  }
+#routers third interface connected to subnet_3
+resource "openstack_networking_router_interface_v2" "router_interface_3" {
+  router_id = openstack_networking_router_v2.router_1.id
+  subnet_id = openstack_networking_subnet_v2.subnet_3.id
 }
 
-# Associate Floating IP
-resource "openstack_networking_floatingip_associate_v2" "fip_1" {
-  floating_ip = openstack_networking_floatingip_v2.floatip_1.address
-  port_id     = openstack_networking_port_v2.port_1.id
+#routers fourth interface connected to subnet_4
+resource "openstack_networking_router_interface_v2" "router_interface_4" {
+  router_id = openstack_networking_router_v2.router_1.id
+  subnet_id = openstack_networking_subnet_v2.subnet_4.id
 }

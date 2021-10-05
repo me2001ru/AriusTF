@@ -1,39 +1,50 @@
 ## VARIABLES
 # Make changes here
 
-variable "instance_name" {
-  type    = string
-  default = "tf-web"
-}
-
-variable "image_name" {
-  type    = string
-  default = "ubuntu-20.04-server-latest"
-}
-
-variable "flavor_name" {
-  type    = string
-  default = "v1-mini-1"
-}
-
-variable "key_name" {
-  type    = string
-  default = "micke"
-}
-
 variable "network_name" {
   type    = string
-  default = "tf_network"
+  default = "Main-Network"
 }
-
+#First subnet details
 variable "subnet_name" {
   type    = string
-  default = "tf_subnet_1"
+  default = "Network_subnet_1"
 }
-
 variable "subnet_cidr" {
   type    = string
-  default = "192.168.199.0/24"
+  default = "192.168.1.0/24"
+}
+#Second subnet details
+variable "subnet_name_2" {
+  type    = string
+  default = "Network_subnet_1"
+}
+variable "subnet_cidr_2" {
+  type    = string
+  default = "192.168.2.0/24"
+}
+#Third subnet details
+variable "subnet_name_3" {
+  type    = string
+  default = "Network_subnet_1"
+}
+variable "subnet_cidr_3" {
+  type    = string
+  default = "192.168.3.0/24"
+}
+#Fourth subnet details
+variable "subnet_name_4" {
+  type    = string
+  default = "Network_subnet_1"
+}
+variable "subnet_cidr_4" {
+  type    = string
+  default = "192.168.4.0/24"
+}
+# router id
+variable "router_id" {
+  type    = string
+  default = "600b8501-78cb-4155-9c9f-23dfcba88828"
 }
 
 variable "dns_ip" {
@@ -41,34 +52,3 @@ variable "dns_ip" {
   default = ["8.8.8.8", "8.8.4.4"]
 }
 
-variable "port_ip" {
-  type    = string
-  default = "192.168.199.10"
-}
-
-variable "router_id" {
-  type    = string
-  default = "71b2edab-5000-43da-b191-d572f1bc22b3"
-}
-
-variable "fip_pool" {
-  type    = string
-  default = "elx-public1"
-}
-
-variable "region" {
-  type    = string
-  default = "sto1"
-}
-
-variable "cloudconfig_web" {
-  type    = string
-  default = <<EOF
-#cloud-config
-system_info:
-  default_user:
-    name: hxp
-packages:
- - nginx
-EOF
-}
