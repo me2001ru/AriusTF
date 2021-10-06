@@ -82,12 +82,7 @@ resource "openstack_compute_secgroup_v2" "secgroup_2" {
   }
 }
 
-#Create a router
-resource "openstack_networking_router_v2" "router_1" {
-  name                = "Magic_Box"
-  admin_state_up      = "true"
-  external_network_id = "600b8501-78cb-4155-9c9f-23dfcba88828" # connects to external interface
-}
+
 
 #routers first interface connected to subnet_1
 resource "openstack_networking_router_interface_v2" "router_interface_1" {
