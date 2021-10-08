@@ -100,3 +100,42 @@ variable "subnet_cidr_wlan_department" {
   type    = string
   default = "192.168.10.64/27"
 }
+
+#Instances
+
+variable "instance_name_nextcloud" {
+  type    = string
+  default = "nextcloud"
+}
+
+variable "image_name_ubuntu" {
+  type    = string
+  default = "ubuntu-20.04-server-latest"
+}
+
+variable "flavor_name_mini" {
+  type    = string
+  default = "v1-mini-1"
+}
+
+variable "key_name" {
+  type    = string
+  default = "cb-key"
+}
+
+variable "cloudconfig_web" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: ubuntu
+packages:
+ - nextcloud
+EOF
+}
+
+variable "port_ip_nextcloud" {
+  type   = string
+  default = "192.168.2.3"
+}
