@@ -108,6 +108,17 @@ variable "instance_name_nextcloud" {
   default = "nextcloud"
 }
 
+variable "instance_name_database" {
+  type    = string
+  default = "database"
+}
+
+variable "instance_name_konferens" {
+  type    = string
+  default = "konferens"
+}
+
+#images
 variable "image_name_ubuntu" {
   type    = string
   default = "ubuntu-20.04-server-latest"
@@ -123,6 +134,7 @@ variable "key_name" {
   default = "cb-key"
 }
 
+#configuration
 variable "cloudconfig_nextcloud" {
   type    = string
   default = <<EOF
@@ -135,7 +147,39 @@ packages:
 EOF
 }
 
+variable "cloudconfig_database" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: ubuntu
+packages:
+ - mysql
+EOF
+}
+
+variable "cloudconfig_konferens" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: ubuntu
+EOF
+}
+# port to connect
 variable "port_ip_nextcloud" {
   type   = string
   default = "192.168.2.3"
+}
+
+variable "port_ip_database" {
+  type   = string
+  default = "192.168.3.3"
+}
+
+variable "port_ip_konferens" {
+  type   = string
+  default = "192.168.4.3"
 }
