@@ -2,14 +2,6 @@
 
 # Make changes here
 
-/*
-# router id
-variable "router_id" {
-  type    = string
-  default = "600b8501-78cb-4155-9c9f-23dfcba88828"
-}
-*/
-
 
 ## NETWORK
 
