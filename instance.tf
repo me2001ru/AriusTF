@@ -1,6 +1,6 @@
 # Create a port
-resource "openstack_networking_port_v2" "port_1" {
-  name                = "port_1"
+resource "openstack_networking_port_v2" "port_nextcloud" {
+  name                = "port_nextcloud"
   network_id          = "${openstack_networking_network_v2.network_media.id}"
   admin_state_up      = "true"
   security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
@@ -21,7 +21,7 @@ resource "openstack_compute_instance_v2" "instance_nextcloud" {
   user_data           = var.cloudconfig_web
 
   network {
-    port              = "${openstack_networking_port_v2.port_1.id}"
+    port              = "${openstack_networking_port_v2.port_nextcloud.id}"
   }
 }
 

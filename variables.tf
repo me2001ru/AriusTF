@@ -123,7 +123,7 @@ variable "key_name" {
   default = "cb-key"
 }
 
-variable "cloudconfig_web" {
+variable "cloudconfig_nextcloud" {
   type    = string
   default = <<EOF
 #cloud-config
