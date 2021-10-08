@@ -18,7 +18,7 @@ resource "openstack_networking_network_v2" "network_hosting" {
   admin_state_up = "true"
 }
 
-resource "openstack_networking_network_v2" "network_department" {
+resource "openstack_networking_network_v2" "network_departments" {
   name           = var.network_name_department
   admin_state_up = "true"
 }
@@ -47,7 +47,7 @@ resource "openstack_networking_subnet_v2" "subnet_media" {
 
 resource "openstack_networking_subnet_v2" "subnet_hosting" {
   name            = var.subnet_name_departments
-  network_id      = openstack_networking_network_v2.network_departments.id
+  network_id      = openstack_networking_network_v2.network_hosting.id
   cidr            = var.subnet_cidr_hosting
   ip_version      = 4
   dns_nameservers = var.dns_ip
@@ -55,7 +55,7 @@ resource "openstack_networking_subnet_v2" "subnet_hosting" {
 
 resource "openstack_networking_subnet_v2" "subnet_departments" {
   name            = var.subnet_name_hosting
-  network_id      = openstack_networking_network_v2.network_hosting.id
+  network_id      = openstack_networking_network_v2.network_departments.id
   cidr            = var.subnet_cidr_departments
   ip_version      = 4
   dns_nameservers = var.dns_ip
