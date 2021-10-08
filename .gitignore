@@ -4,3 +4,5 @@ terraform*
 # rc files
 *openrc.sh
 
+# MAC OS Metadata
+.DS_Store
