@@ -1,4 +1,4 @@
-# Create a port
+# Ports
 resource "openstack_networking_port_v2" "port_nextcloud" {
   name                = "port_nextcloud"
   network_id          = "${openstack_networking_network_v2.network_media.id}"
@@ -30,13 +30,12 @@ resource "openstack_networking_port_v2" "port_konferens" {
   security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
 
   fixed_ip {
-    subnet_id         = "${openstack_networking_subnet_v2.subnet_departments.id}"
+    subnet_id         = "${openstack_networking_subnet_v2.subnet_department.id}"
     ip_address        = var.port_ip_konferens
   }
 }
 
-## INSTANCE
-# Create an instance
+# Instances
 resource "openstack_compute_instance_v2" "instance_nextcloud" {
   name                = var.instance_name_nextcloud
   image_name          = var.image_name_ubuntu

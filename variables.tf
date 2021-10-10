@@ -67,11 +67,11 @@ variable "subnet_cidr_hosting" {
   default = "192.168.3.0/24"
 }
 
-variable "subnet_name_departments" {
+variable "subnet_name_department" {
   type    = string
-  default = "Departments-subnet"
+  default = "Department-subnet"
 }
-variable "subnet_cidr_departments" {
+variable "subnet_cidr_department" {
   type    = string
   default = "192.168.4.0/24"
 }
