@@ -60,10 +60,10 @@ resource "openstack_networking_subnet_v2" "subnet_hosting" {
   dns_nameservers = var.dns_ip
 }
 
-resource "openstack_networking_subnet_v2" "subnet_departments" {
-  name            = var.subnet_name_departments
+resource "openstack_networking_subnet_v2" "subnet_department" {
+  name            = var.subnet_name_department
   network_id      = openstack_networking_network_v2.network_department.id
-  cidr            = var.subnet_cidr_departments
+  cidr            = var.subnet_cidr_department
   ip_version      = 4
   dns_nameservers = var.dns_ip
 }
@@ -104,9 +104,9 @@ resource "openstack_networking_router_interface_v2" "router_interface_media" {
   subnet_id = openstack_networking_subnet_v2.subnet_media.id
 }
 
-resource "openstack_networking_router_interface_v2" "router_interface_departments" {
+resource "openstack_networking_router_interface_v2" "router_interface_department" {
   router_id = openstack_networking_router_v2.router.id
-  subnet_id = openstack_networking_subnet_v2.subnet_departments.id
+  subnet_id = openstack_networking_subnet_v2.subnet_department.id
 }
 
 resource "openstack_networking_router_interface_v2" "router_interface_hosting" {

@@ -67,11 +67,11 @@ variable "subnet_cidr_hosting" {
   default = "192.168.3.0/24"
 }
 
-variable "subnet_name_departments" {
+variable "subnet_name_department" {
   type    = string
-  default = "Departments-subnet"
+  default = "Department-subnet"
 }
-variable "subnet_cidr_departments" {
+variable "subnet_cidr_department" {
   type    = string
   default = "192.168.4.0/24"
 }
@@ -114,9 +114,9 @@ variable "instance_name_database" {
   default = "database"
 }
 
-variable "instance_name_konferens" {
+variable "instance_name_conference" {
   type    = string
-  default = "konferens"
+  default = "conference"
 }
 
 # Images
@@ -160,7 +160,7 @@ packages:
 EOF
 }
 
-variable "cloudconfig_konferens" {
+variable "cloudconfig_conference" {
   type    = string
   default = <<EOF
 #cloud-config
@@ -181,7 +181,7 @@ variable "port_ip_database" {
   default = "192.168.3.3"
 }
 
-variable "port_ip_konferens" {
+variable "port_ip_conference" {
   type   = string
   default = "192.168.4.3"
 }
