@@ -23,15 +23,15 @@ resource "openstack_networking_port_v2" "port_database" {
   }
 }
 
-resource "openstack_networking_port_v2" "port_konferens" {
-  name                = "port_konferens"
+resource "openstack_networking_port_v2" "port_conference" {
+  name                = "port_conference"
   network_id          = "${openstack_networking_network_v2.network_department.id}"
   admin_state_up      = "true"
   security_group_ids  = ["${openstack_compute_secgroup_v2.secgroup_1.id}"]
 
   fixed_ip {
     subnet_id         = "${openstack_networking_subnet_v2.subnet_department.id}"
-    ip_address        = var.port_ip_konferens
+    ip_address        = var.port_ip_conference
   }
 }
 
@@ -62,15 +62,15 @@ resource "openstack_compute_instance_v2" "instance_database" {
   }
 }
 
-resource "openstack_compute_instance_v2" "instance_konferens" {
-  name                = var.instance_name_konferens
+resource "openstack_compute_instance_v2" "instance_conference" {
+  name                = var.instance_name_conference
   image_name          = var.image_name_ubuntu
   flavor_name         = var.flavor_name_mini
   key_pair            = var.key_name
   security_groups     = ["default","${openstack_compute_secgroup_v2.secgroup_1.name}","${openstack_compute_secgroup_v2.secgroup_2.name}"]
-  user_data           = var.cloudconfig_konferens
+  user_data           = var.cloudconfig_conference
 
   network {
-    port              = "${openstack_networking_port_v2.port_konferens.id}"
+    port              = "${openstack_networking_port_v2.port_conference.id}"
   }
 }
