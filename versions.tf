@@ -2,7 +2,7 @@
 # Define required providers
 terraform {
   backend "remote" {
-    organization = "AriusTF"
+    organization = "AriesTF"
     workspaces {
       name = "AriusTF"
     }
