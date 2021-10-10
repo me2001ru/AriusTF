@@ -172,16 +172,16 @@ EOF
 
 # Ports
 variable "port_ip_nextcloud" {
-  type   = string
+  type    = string
   default = "192.168.2.3"
 }
 
 variable "port_ip_database" {
-  type   = string
+  type    = string
   default = "192.168.3.3"
 }
 
 variable "port_ip_conference" {
-  type   = string
+  type    = string
   default = "192.168.4.3"
 }
