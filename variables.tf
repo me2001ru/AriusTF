@@ -137,7 +137,7 @@ variable "key_name" {
 }
 
 variable "key_public" {
-  type    = string
+  type = string
 
   # Zephyro's key
   default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCtgFcP+fiDOSdynaL2meiAp9GUvvzCgjpXBhjiVDj6OrG3ShAPUMCxkGrUG8nq1IrFCFbCjSzcopymykXikwUxvnAi0PVskO70XulMjWc/PKBtrD0Yhuh8w4yHjs3ZXUL1cOOq2NTaejiWcT7h7gy0N+fWBUo3TI/Y7qqkGHQ/Y0trficbqb4kEcLx0lzK3RB4hlqpj0kBXS/s7BKtUqxrD6kUH4wxT8w8bHMI4fmT8UHl3dX/wilOW/9wFyrrgYFs+g+Ta+Igi2KpTqO8rxBXSA5Js538kS9Hxh3MZVnige+Zs4yZU98et8/W+YJl5lkktbEj97/gX2puAW0jPs78l4LiK0LkXwvVL6RRKXw0M6/IC00UMPMSstN4cImAEbKwXfd6/ZiJG+m2MdQMR6lcSbtUA8XkkOHHHnyOd9OQ+NUl1oJ0xiQFsi2o0rsYrZysdXxYnbFdojDe4tBKMG31HDfoWGELo9tEAfGez2mOwKBwc8+BrO0iuxvMAgnPaBs= Zephyro@Zephyros-MBP"
