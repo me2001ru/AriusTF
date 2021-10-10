@@ -1,6 +1,5 @@
 ## VARIABLES
 
-
 # Router id
 variable "router_id" {
   type    = string
