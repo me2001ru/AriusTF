@@ -132,7 +132,12 @@ variable "flavor_name_mini" {
 
 variable "key_name" {
   type    = string
-  default = "cb-key"
+  default = "rasmus"
+}
+
+variable "key_value" {
+  type    = string
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNzfi8sVQBv0AJzB92x4sPi4w4NtbB/ibHPvmHyGmhz3r+YVWpHetLm+Q09h/6abUR5uffPxuWyxpGsxDG5Mwn/80PGxN1EndTQbauAqVsliHPy1nXHbvyPACfZvehZUqZA+BEhIP9mBGBeqCkIpZlf5TU3NB58ucU/R5UITqC2LAMhxxFKBNTNQBsb9G8O8NQa8k3p+4a2fDwUXKcGVcb6CZqJX+EhkH1g9qv0vjAhCguY+azSQUGStwQJK7vxKHNfQSnLmZAsx+n4N956wT6OJdsd8nYsE7h0UDvUNM5FBz/4iEOxjDM3F7l5rX/NtiAPlS8t4qKS60Nm6rvjf01 Generated-by-Nova"
 }
 
 # Configuration

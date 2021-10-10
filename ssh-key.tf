@@ -1,9 +1,9 @@
 # Create KeyPairs
 
-# resource "openstack_compute_keypair_v2" "key2" {
-#   name       = "key2"
-#   public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBlVSpJR6m3EZ30d/oVdAolxQgOVolLH5RVuQYGGejXR zkems@DESKTOP-ZZREREDKT"
-# }
+resource "openstack_compute_keypair_v2" "ssh-key" {
+    name       = var.key_name
+    public_key = var.key_value
+}
 
 # resource "openstack_compute_keypair_v2" "key4" {
 #   name       = "key4"
