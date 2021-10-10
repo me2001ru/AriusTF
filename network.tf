@@ -46,7 +46,7 @@ resource "openstack_networking_subnet_v2" "subnet_media" {
 }
 
 resource "openstack_networking_subnet_v2" "subnet_hosting" {
-  name            = var.subnet_name_departments
+  name            = var.subnet_name_hosting
   network_id      = openstack_networking_network_v2.network_hosting.id
   cidr            = var.subnet_cidr_hosting
   ip_version      = 4
@@ -54,7 +54,7 @@ resource "openstack_networking_subnet_v2" "subnet_hosting" {
 }
 
 resource "openstack_networking_subnet_v2" "subnet_departments" {
-  name            = var.subnet_name_hosting
+  name            = var.subnet_name_departments
   network_id      = openstack_networking_network_v2.network_departments.id
   cidr            = var.subnet_cidr_departments
   ip_version      = 4
