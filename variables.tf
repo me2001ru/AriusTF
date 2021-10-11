@@ -113,9 +113,20 @@ variable "instance_name_database" {
   default = "database"
 }
 
+###NY VARIABEL####
+variable "instance_name_it_admin" {
+  type    = string
+  default = "IT-Admin"
+}
+
 variable "instance_name_conference" {
   type    = string
   default = "conference"
+}
+
+variable "instance_name_webserver" {
+  type    = string
+  default = "webserver"
 }
 
 # Images
@@ -134,11 +145,6 @@ variable "flavor_name_mini" {
 variable "key_name" {
   type    = string
   default = "rasmus"
-}
-
-variable "key_value" {
-  type    = string
-  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNzfi8sVQBv0AJzB92x4sPi4w4NtbB/ibHPvmHyGmhz3r+YVWpHetLm+Q09h/6abUR5uffPxuWyxpGsxDG5Mwn/80PGxN1EndTQbauAqVsliHPy1nXHbvyPACfZvehZUqZA+BEhIP9mBGBeqCkIpZlf5TU3NB58ucU/R5UITqC2LAMhxxFKBNTNQBsb9G8O8NQa8k3p+4a2fDwUXKcGVcb6CZqJX+EhkH1g9qv0vjAhCguY+azSQUGStwQJK7vxKHNfQSnLmZAsx+n4N956wT6OJdsd8nYsE7h0UDvUNM5FBz/4iEOxjDM3F7l5rX/NtiAPlS8t4qKS60Nm6rvjf01 Generated-by-Nova"
 }
 
 variable "key_public" {
@@ -188,6 +194,28 @@ system_info:
 EOF
 }
 
+variable "cloudconfig_it_admin" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: ubuntu
+EOF
+}
+
+variable "cloudconfig_webserver" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: ubuntu
+packages:
+ - apache2
+EOF
+}
+
 # Ports
 variable "port_ip_nextcloud" {
   type    = string
@@ -203,4 +231,15 @@ variable "port_ip_conference" {
   type    = string
   default = "192.168.4.3"
 }
+
+variable "port_ip_it_admin" {
+  type    = string
+  default = "192.168.4.2"
+}
+
+variable "port_webserver" {
+  type    = string
+  default = "192.168.1.10"
+}
+
 
