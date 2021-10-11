@@ -1,6 +1,5 @@
 ## VARIABLES
 
-
 # Router id
 variable "router_id" {
   type    = string
@@ -130,9 +129,28 @@ variable "flavor_name_mini" {
   default = "v1-mini-1"
 }
 
+
+# SSH Key
 variable "key_name" {
   type    = string
-  default = "cb-key"
+  default = "rasmus"
+}
+
+variable "key_value" {
+  type    = string
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNzfi8sVQBv0AJzB92x4sPi4w4NtbB/ibHPvmHyGmhz3r+YVWpHetLm+Q09h/6abUR5uffPxuWyxpGsxDG5Mwn/80PGxN1EndTQbauAqVsliHPy1nXHbvyPACfZvehZUqZA+BEhIP9mBGBeqCkIpZlf5TU3NB58ucU/R5UITqC2LAMhxxFKBNTNQBsb9G8O8NQa8k3p+4a2fDwUXKcGVcb6CZqJX+EhkH1g9qv0vjAhCguY+azSQUGStwQJK7vxKHNfQSnLmZAsx+n4N956wT6OJdsd8nYsE7h0UDvUNM5FBz/4iEOxjDM3F7l5rX/NtiAPlS8t4qKS60Nm6rvjf01 Generated-by-Nova"
+}
+
+variable "key_public" {
+  type = string
+
+  # Zephyro's key
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCtgFcP+fiDOSdynaL2meiAp9GUvvzCgjpXBhjiVDj6OrG3ShAPUMCxkGrUG8nq1IrFCFbCjSzcopymykXikwUxvnAi0PVskO70XulMjWc/PKBtrD0Yhuh8w4yHjs3ZXUL1cOOq2NTaejiWcT7h7gy0N+fWBUo3TI/Y7qqkGHQ/Y0trficbqb4kEcLx0lzK3RB4hlqpj0kBXS/s7BKtUqxrD6kUH4wxT8w8bHMI4fmT8UHl3dX/wilOW/9wFyrrgYFs+g+Ta+Igi2KpTqO8rxBXSA5Js538kS9Hxh3MZVnige+Zs4yZU98et8/W+YJl5lkktbEj97/gX2puAW0jPs78l4LiK0LkXwvVL6RRKXw0M6/IC00UMPMSstN4cImAEbKwXfd6/ZiJG+m2MdQMR6lcSbtUA8XkkOHHHnyOd9OQ+NUl1oJ0xiQFsi2o0rsYrZysdXxYnbFdojDe4tBKMG31HDfoWGELo9tEAfGez2mOwKBwc8+BrO0iuxvMAgnPaBs= Zephyro@Zephyros-MBP"
+
+  # Placeholders for others
+  # default = ""
+  # default = ""
+  # default = ""
 }
 
 # Configuration
@@ -185,3 +203,4 @@ variable "port_ip_conference" {
   type    = string
   default = "192.168.4.3"
 }
+
