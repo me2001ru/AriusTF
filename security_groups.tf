@@ -41,7 +41,7 @@ resource "openstack_compute_secgroup_v2" "secgroup_3" {
     from_port   = 22
     to_port     = 22
     ip_protocol = "tcp"
-    cidr        = "0.0.0.0/0"
+    cidr        = "0.0.0.0/0" 
   }
 }
 
@@ -75,5 +75,5 @@ resource "openstack_compute_secgroup_v2" "secgroup_5" {
     ip_protocol = "tcp"
     cidr        = "192.168.10.0/24"
   }
-
+  
 }
