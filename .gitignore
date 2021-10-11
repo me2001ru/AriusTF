@@ -6,3 +6,6 @@ terraform*
 
 # MAC OS Metadata
 .DS_Store
+
+# Ignore local changes to versions.tf
+versions.tf
