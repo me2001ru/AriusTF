@@ -114,6 +114,12 @@ variable "instance_name_database" {
   default = "database"
 }
 
+###NY VARIABEL####
+variable "instance_name_it_admin" {
+  type    = string
+  default = "IT-Admin"
+}
+
 variable "instance_name_conference" {
   type    = string
   default = "conference"
@@ -132,7 +138,7 @@ variable "flavor_name_mini" {
 
 variable "key_name" {
   type    = string
-  default = "cb-key"
+  default = "testKey"
 }
 
 # Configuration
@@ -170,18 +176,33 @@ system_info:
 EOF
 }
 
+variable "cloudconfig_it_admin" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: ubuntu
+EOF
+}
+
 # Ports
 variable "port_ip_nextcloud" {
-  type   = string
+  type    = string
   default = "192.168.2.3"
 }
 
 variable "port_ip_database" {
-  type   = string
+  type    = string
   default = "192.168.3.3"
 }
 
 variable "port_ip_conference" {
-  type   = string
+  type    = string
   default = "192.168.4.3"
+}
+
+variable "port_ip_it_admin" {
+  type    = string
+  default = "192.168.4.2"
 }
