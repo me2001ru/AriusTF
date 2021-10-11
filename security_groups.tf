@@ -1,8 +1,8 @@
 # Security Groups
 
-# Allow HTTP(S) SG 
-resource "openstack_compute_secgroup_v2" "secgroup_1" {
-  name        = "AllowHTTP(S)"
+# Webserver
+resource "openstack_compute_secgroup_v2" "webserver" {
+  name        = "Webserver: HTTP/HTTPS"
   description = "Allow http/https traffic to WebServer"
 
   rule {
@@ -20,9 +20,9 @@ resource "openstack_compute_secgroup_v2" "secgroup_1" {
   }
 }
 
-# SSH SG
-resource "openstack_compute_secgroup_v2" "secgroup_2" {
-  name        = "AllowSSH"
+# External SSH (anywhere -> admin instance)
+resource "openstack_compute_secgroup_v2" "SSH_external" {
+  name        = "SSH_external"
   description = "Allow SSH from everywhere"
 
   rule {
@@ -32,10 +32,11 @@ resource "openstack_compute_secgroup_v2" "secgroup_2" {
     cidr        = "0.0.0.0/0"
   }
 }
-# Allow SSH from IT-server
-resource "openstack_compute_secgroup_v2" "secgroup_3" {
-  name        = "InternalSSH"
-  description = "Allow SSH from IT-server"
+
+# Internal SSH (admin instance -> internal instances)
+resource "openstack_compute_secgroup_v2" "SSH_internal" {
+  name        = "SSH_internal"
+  description = "Allow SSH from admin instance"
 
   rule {
     from_port   = 22
@@ -45,9 +46,9 @@ resource "openstack_compute_secgroup_v2" "secgroup_3" {
   }
 }
 
-# MySQL SG
-resource "openstack_compute_secgroup_v2" "secgroup_4" {
-  name        = "AllowMySQL"
+# MySQL / Database
+resource "openstack_compute_secgroup_v2" "MySQL" {
+  name        = "MySQL"
   description = "Allow traffic to database from Webserver"
 
   rule {
@@ -59,9 +60,9 @@ resource "openstack_compute_secgroup_v2" "secgroup_4" {
 }
 
 # Allow connection to NextCloud server 
-resource "openstack_compute_secgroup_v2" "secgroup_5" {
-  name        = "AllowWlan"
-  description = "Allow traffic from Wlan"
+resource "openstack_compute_secgroup_v2" "NextCloud" {
+  name        = "NextCloud"
+  description = "Allow tcp access from Wlan Subnet"
 
   rule {
     from_port   = 443
@@ -75,5 +76,4 @@ resource "openstack_compute_secgroup_v2" "secgroup_5" {
     ip_protocol = "tcp"
     cidr        = "192.168.10.0/24"
   }
-
 }

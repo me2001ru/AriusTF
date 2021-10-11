@@ -105,28 +105,27 @@ variable "subnet_cidr_wlan_department" {
 # Instances
 variable "instance_name_nextcloud" {
   type    = string
-  default = "nextcloud"
+  default = "NextCloud"
 }
 
 variable "instance_name_database" {
   type    = string
-  default = "database"
+  default = "Database"
 }
 
-###NY VARIABEL####
-variable "instance_name_it_admin" {
+variable "instance_name_admin" {
   type    = string
-  default = "IT-Admin"
+  default = "Admin"
 }
 
 variable "instance_name_conference" {
   type    = string
-  default = "conference"
+  default = "Conference"
 }
 
 variable "instance_name_webserver" {
   type    = string
-  default = "webserver"
+  default = "Webserver"
 }
 
 # Images
@@ -144,10 +143,10 @@ variable "flavor_name_mini" {
 # SSH Key
 variable "key_name" {
   type    = string
-  default = "rasmus"
+  default = "admin-key"
 }
 
-variable "key_public" {
+variable "key_value" {
   type = string
 
   # Zephyro's key
@@ -194,7 +193,7 @@ system_info:
 EOF
 }
 
-variable "cloudconfig_it_admin" {
+variable "cloudconfig_admin" {
   type    = string
   default = <<EOF
 #cloud-config
@@ -216,27 +215,45 @@ packages:
 EOF
 }
 
-# Ports
+# Ports: Names
+variable "port_name_nextcloud" {
+  type    = string
+  default = "nextcloud port"
+}
+variable "port_name_database" {
+  type    = string
+  default = "database port"
+}
+variable "port_name_conference" {
+  type    = string
+  default = "conference port"
+}
+variable "port_name_admin" {
+  type    = string
+  default = "admin port"
+}
+variable "port_name_webserver" {
+  type    = string
+  default = "webserver port"
+}
+
+# Ports: IP
 variable "port_ip_nextcloud" {
   type    = string
   default = "192.168.2.3"
 }
-
 variable "port_ip_database" {
   type    = string
   default = "192.168.3.3"
 }
-
 variable "port_ip_conference" {
   type    = string
   default = "192.168.4.3"
 }
-
-variable "port_ip_it_admin" {
+variable "port_ip_admin" {
   type    = string
   default = "192.168.4.2"
 }
-
 variable "port_webserver" {
   type    = string
   default = "192.168.1.10"
