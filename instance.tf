@@ -98,8 +98,7 @@ resource "openstack_compute_instance_v2" "instance_IT" {
   user_data       = var.cloudconfig_it_admin
 
   network {
-    port       = openstack_networking_port_v2.port_ip_it_admin.id
-    ip_address = var.port_ip_it_admin
+    port = openstack_networking_port_v2.port_ip_it_admin.id
   }
 }
 
