@@ -144,7 +144,7 @@ variable "flavor_name_mini" {
 # SSH Key
 variable "key_name" {
   type    = string
-  default = "testKey"
+  default = "rasmus"
 }
 
 variable "key_public" {
