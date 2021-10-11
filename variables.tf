@@ -124,6 +124,11 @@ variable "instance_name_conference" {
   default = "conference"
 }
 
+variable "instance_name_webserver" {
+  type    = string
+  default = "webserver"
+}
+
 # Images
 variable "image_name_ubuntu" {
   type    = string
@@ -199,6 +204,18 @@ system_info:
 EOF
 }
 
+variable "cloudconfig_webserver" {
+  type    = string
+  default = <<EOF
+#cloud-config
+system_info:
+  default_user:
+    name: ubuntu
+packages:
+ - apache2
+EOF
+}
+
 # Ports
 variable "port_ip_nextcloud" {
   type    = string
@@ -219,3 +236,10 @@ variable "port_ip_it_admin" {
   type    = string
   default = "192.168.4.2"
 }
+
+variable "port_webserver" {
+  type    = string
+  default = "192.168.1.10"
+}
+
+
