@@ -129,3 +129,14 @@ resource "openstack_networking_router_interface_v2" "router_interface_wlan_depar
   router_id = openstack_networking_router_v2.router.id
   subnet_id = openstack_networking_subnet_v2.subnet_wlan_department.id
 }
+
+# Floating IPs
+resource "openstack_networking_floatingip_v2" "floatip_webserver" {
+  pool                = var.fip_pool
+}
+
+# Associate Floating IP
+resource "openstack_networking_floatingip_associate_v2" "fip_1" {
+  floating_ip         = "${openstack_networking_floatingip_v2.floatip_webserver.address}"
+  port_id             = "${openstack_networking_port_v2.port_webserver.id}"
+}

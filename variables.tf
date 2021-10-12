@@ -259,4 +259,8 @@ variable "port_webserver" {
   default = "192.168.1.10"
 }
 
-
+# Floating IP pool
+variable "fip_pool" {
+  type    = string
+  default = "elx-public1"
+}
