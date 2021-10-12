@@ -135,8 +135,18 @@ resource "openstack_networking_floatingip_v2" "floatip_webserver" {
   pool                = var.fip_pool
 }
 
+resource "openstack_networking_floatingip_v2" "floatip_admin" {
+  pool                = var.fip_pool
+}
+
 # Associate Floating IP
-resource "openstack_networking_floatingip_associate_v2" "fip_1" {
+resource "openstack_networking_floatingip_associate_v2" "floatip_webserver_associate" {
   floating_ip         = "${openstack_networking_floatingip_v2.floatip_webserver.address}"
   port_id             = "${openstack_networking_port_v2.port_webserver.id}"
+}
+
+# Associate Floating IP
+resource "openstack_networking_floatingip_associate_v2" "floatip_admin_associate" {
+  floating_ip         = "${openstack_networking_floatingip_v2.floatip_admin.address}"
+  port_id             = "${openstack_networking_port_v2.port_admin.id}"
 }
