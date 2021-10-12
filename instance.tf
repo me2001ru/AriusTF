@@ -3,7 +3,7 @@ resource "openstack_networking_port_v2" "port_nextcloud" {
   name               = var.port_name_nextcloud
   network_id         = openstack_networking_network_v2.network_media.id
   admin_state_up     = "true"
-  security_group_ids = ["${openstack_compute_secgroup_v2.SSH_internal.id}", "${openstack_compute_secgroup_v2.NextCloud.id}"]
+  security_group_ids = ["${openstack_compute_secgroup_v2.SSH_internal.id}", "${openstack_networking_secgroup_v2.NextCloud.id}"]
 
   fixed_ip {
     subnet_id  = openstack_networking_subnet_v2.subnet_media.id
