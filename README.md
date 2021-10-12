@@ -1,19 +1,18 @@
-<!-- How the infrastructure should work:
-
-- 1 Router
-- 1 internal network
-- 3 or 4 subnets
-- 3 instances in each subnet
-- floating ip's in each subnet -->
-
 # Aries - Oumph
 
-Getting started:
+Getting started with developing:
+- Download this repository
 - Download provider plugin (RC File)
+- install terraform
+- open the versions.tf and remove/comment out lines 13-18
+- source the rc file to set environmental variables used for authenticating to openstack
 
 ### Terraform commands:
 - Initialize:       ```terraform init```
 - Display plan:     ```terraform plan```
-- Manifest:         ```terraform apply -auto-approve```
-- Destroy stack:    ```terraform destroy```
+- Format:           ```terraform fmt [-check] [-diff]```
+- Validate:         ```terraform validate```
+- Plan:             ```terraform plan```
+- Apply:            ```terraform apply -auto-approve```
+- Destroy:          ```terraform destroy```
 
