@@ -73,7 +73,7 @@ resource "openstack_networking_secgroup_rule_v2" "NextCloud_Rule_Inbound_HTTP" {
   port_range_min    = 80
   port_range_max    = 80
   remote_ip_prefix  = "192.168.10.0/24"
-  security_group_id = "${openstack_networking_secgroup_v2.NextCloud.id}"
+  security_group_id = openstack_networking_secgroup_v2.NextCloud.id
 }
 
 # Https in
@@ -84,7 +84,7 @@ resource "openstack_networking_secgroup_rule_v2" "NextCloud_Rule_Inbound_HTTPS" 
   port_range_min    = 443
   port_range_max    = 443
   remote_ip_prefix  = "192.168.10.0/24"
-  security_group_id = "${openstack_networking_secgroup_v2.NextCloud.id}"
+  security_group_id = openstack_networking_secgroup_v2.NextCloud.id
 }
 
 # Http out
@@ -93,7 +93,7 @@ resource "openstack_networking_secgroup_rule_v2" "NextCloud_Rule_Outbound_HTTP" 
   ethertype         = "IPv4"
   protocol          = "tcp"
   remote_ip_prefix  = "192.168.10.0/24"
-  security_group_id = "${openstack_networking_secgroup_v2.NextCloud.id}"
+  security_group_id = openstack_networking_secgroup_v2.NextCloud.id
 }
 
 # Https out
@@ -102,5 +102,5 @@ resource "openstack_networking_secgroup_rule_v2" "NextCloud_Rule_Outbound_HTTPS"
   ethertype         = "IPv4"
   protocol          = "tcp"
   remote_ip_prefix  = "192.168.10.0/24"
-  security_group_id = "${openstack_networking_secgroup_v2.NextCloud.id}"
+  security_group_id = openstack_networking_secgroup_v2.NextCloud.id
 }
