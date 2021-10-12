@@ -65,7 +65,7 @@ resource "openstack_compute_instance_v2" "instance_nextcloud" {
   image_name      = var.image_name_ubuntu
   flavor_name     = var.flavor_name_mini
   key_pair        = var.key_name
-  security_groups = ["default", "${openstack_compute_secgroup_v2.SSH_internal.name}", "${openstack_compute_secgroup_v2.NextCloud.name}"]
+  security_groups = ["${openstack_compute_secgroup_v2.SSH_internal.name}", "${openstack_compute_secgroup_v2.NextCloud.name}"]
   user_data       = var.cloudconfig_nextcloud
 
   network {
@@ -78,7 +78,7 @@ resource "openstack_compute_instance_v2" "instance_database" {
   image_name      = var.image_name_ubuntu
   flavor_name     = var.flavor_name_mini
   key_pair        = var.key_name
-  security_groups = ["default", "${openstack_compute_secgroup_v2.SSH_internal.name}", "${openstack_compute_secgroup_v2.MySQL.name}"]
+  security_groups = ["${openstack_compute_secgroup_v2.SSH_internal.name}", "${openstack_compute_secgroup_v2.MySQL.name}"]
   user_data       = var.cloudconfig_database
 
   network {
@@ -92,7 +92,7 @@ resource "openstack_compute_instance_v2" "instance_admin" {
   flavor_name = var.flavor_name_mini
   key_pair    = var.key_name
 
-  security_groups = ["default", "${openstack_compute_secgroup_v2.SSH_external.name}"]
+  security_groups = ["${openstack_compute_secgroup_v2.SSH_external.name}"]
   user_data       = var.cloudconfig_admin
 
   network {
@@ -106,7 +106,7 @@ resource "openstack_compute_instance_v2" "instance_webserver" {
   flavor_name = var.flavor_name_mini
   key_pair    = var.key_name
 
-  security_groups = ["default", "${openstack_compute_secgroup_v2.SSH_internal.name}", "${openstack_compute_secgroup_v2.webserver.name}"]
+  security_groups = ["${openstack_compute_secgroup_v2.SSH_internal.name}", "${openstack_compute_secgroup_v2.webserver.name}"]
   user_data       = var.cloudconfig_webserver
 
   network {
@@ -119,7 +119,7 @@ resource "openstack_compute_instance_v2" "instance_conference" {
   image_name      = var.image_name_ubuntu
   flavor_name     = var.flavor_name_mini
   key_pair        = var.key_name
-  security_groups = ["default", "${openstack_compute_secgroup_v2.SSH_internal.name}"]
+  security_groups = ["${openstack_compute_secgroup_v2.SSH_internal.name}"]
   user_data       = var.cloudconfig_conference
 
   network {
