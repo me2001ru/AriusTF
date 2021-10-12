@@ -15,4 +15,3 @@ Getting started with developing:
 - Plan:             ```terraform plan```
 - Apply:            ```terraform apply -auto-approve```
 - Destroy:          ```terraform destroy```
-
