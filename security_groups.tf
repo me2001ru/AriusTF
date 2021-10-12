@@ -40,7 +40,7 @@ resource "openstack_networking_secgroup_rule_v2" "Webserver_Rule_Inbound_HTTP_IP
   protocol          = "tcp"
   port_range_min    = 80
   port_range_max    = 80
-  remote_ip_prefix  = "0.0.0.0/0"
+  remote_ip_prefix  = "::/0"
   security_group_id = openstack_networking_secgroup_v2.Webserver.id
 }
 
@@ -51,7 +51,7 @@ resource "openstack_networking_secgroup_rule_v2" "Webserver_Rule_Inbound_HTTPS_I
   protocol          = "tcp"
   port_range_min    = 443
   port_range_max    = 443
-  remote_ip_prefix  = "0.0.0.0/0"
+  remote_ip_prefix  = "::/0"
   security_group_id = openstack_networking_secgroup_v2.Webserver.id
 }
 
@@ -69,7 +69,7 @@ resource "openstack_networking_secgroup_rule_v2" "Webserver_Rule_Outbound_IPv6" 
   direction         = "egress"
   ethertype         = "IPv6"
   protocol          = "tcp"
-  remote_ip_prefix  = "0.0.0.0/0"
+  remote_ip_prefix  = "::/0"
   security_group_id = openstack_networking_secgroup_v2.Webserver.id
 }
 
@@ -133,7 +133,9 @@ resource "openstack_networking_secgroup_rule_v2" "Admin_Rule_Outbound_SSH" {
   direction         = "egress"
   ethertype         = "IPv4"
   protocol          = "tcp"
-  remote_ip_prefix  = "0.0.0.0/0" # TODO 
+  port_range_min    = 22
+  port_range_max    = 22
+  remote_ip_prefix  = "192.168.0.0/16"
   security_group_id = openstack_networking_secgroup_v2.Admin.id
 }
 
