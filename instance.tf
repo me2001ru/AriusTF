@@ -3,7 +3,7 @@ resource "openstack_networking_port_v2" "port_nextcloud" {
   name               = var.port_name_nextcloud
   network_id         = openstack_networking_network_v2.network_media.id
   admin_state_up     = "true"
-  security_group_ids = ["${openstack_compute_secgroup_v2.SSH_internal.id}", "${openstack_networking_secgroup_v2.NextCloud.id}"]
+  security_group_ids = ["${openstack_networking_secgroup_v2.InternallyManaged.id}", "${openstack_networking_secgroup_v2.NextCloud.id}"]
 
   fixed_ip {
     subnet_id  = openstack_networking_subnet_v2.subnet_media.id
@@ -15,7 +15,7 @@ resource "openstack_networking_port_v2" "port_database" {
   name               = var.port_name_database
   network_id         = openstack_networking_network_v2.network_hosting.id
   admin_state_up     = "true"
-  security_group_ids = ["${openstack_compute_secgroup_v2.SSH_internal.id}", "${openstack_compute_secgroup_v2.MySQL.id}"]
+  security_group_ids = ["${openstack_networking_secgroup_v2.InternallyManaged.id}", "${openstack_networking_secgroup_v2.Database.id}"]
 
   fixed_ip {
     subnet_id  = openstack_networking_subnet_v2.subnet_hosting.id
@@ -27,7 +27,7 @@ resource "openstack_networking_port_v2" "port_conference" {
   name               = var.port_name_conference
   network_id         = openstack_networking_network_v2.network_department.id
   admin_state_up     = "true"
-  security_group_ids = ["${openstack_compute_secgroup_v2.SSH_internal.id}"]
+  security_group_ids = ["${openstack_networking_secgroup_v2.InternallyManaged.id}"]
 
   fixed_ip {
     subnet_id  = openstack_networking_subnet_v2.subnet_department.id
@@ -39,7 +39,7 @@ resource "openstack_networking_port_v2" "port_admin" {
   name               = var.port_name_admin
   network_id         = openstack_networking_network_v2.network_department.id
   admin_state_up     = "true"
-  security_group_ids = ["${openstack_compute_secgroup_v2.SSH_external.id}"]
+  security_group_ids = ["${openstack_networking_secgroup_v2.Admin.id}"]
 
   fixed_ip {
     subnet_id  = openstack_networking_subnet_v2.subnet_department.id
@@ -51,7 +51,7 @@ resource "openstack_networking_port_v2" "port_webserver" {
   name               = var.port_name_webserver
   network_id         = openstack_networking_network_v2.network_dmz.id
   admin_state_up     = "true"
-  security_group_ids = ["${openstack_compute_secgroup_v2.webserver.id}", "${openstack_compute_secgroup_v2.SSH_internal.id}"]
+  security_group_ids = ["${openstack_networking_secgroup_v2.Webserver.id}", "${openstack_networking_secgroup_v2.InternallyManaged.id}"]
 
   fixed_ip {
     subnet_id  = openstack_networking_subnet_v2.subnet_dmz.id
@@ -65,7 +65,7 @@ resource "openstack_compute_instance_v2" "instance_nextcloud" {
   image_name      = var.image_name_ubuntu
   flavor_name     = var.flavor_name_mini
   key_pair        = var.key_name
-  security_groups = ["${openstack_compute_secgroup_v2.SSH_internal.name}", "${openstack_compute_secgroup_v2.NextCloud.name}"]
+  security_groups = ["${openstack_networking_secgroup_v2.InternallyManaged.name}", "${openstack_networking_secgroup_v2.NextCloud.name}"]
   user_data       = var.cloudconfig_nextcloud
 
   network {
@@ -78,7 +78,7 @@ resource "openstack_compute_instance_v2" "instance_database" {
   image_name      = var.image_name_ubuntu
   flavor_name     = var.flavor_name_mini
   key_pair        = var.key_name
-  security_groups = ["${openstack_compute_secgroup_v2.SSH_internal.name}", "${openstack_compute_secgroup_v2.MySQL.name}"]
+  security_groups = ["${openstack_networking_secgroup_v2.InternallyManaged.name}", "${openstack_networking_secgroup_v2.Database.name}"]
   user_data       = var.cloudconfig_database
 
   network {
@@ -92,7 +92,7 @@ resource "openstack_compute_instance_v2" "instance_admin" {
   flavor_name = var.flavor_name_mini
   key_pair    = var.key_name
 
-  security_groups = ["${openstack_compute_secgroup_v2.SSH_external.name}"]
+  security_groups = ["${openstack_networking_secgroup_v2.Admin.name}"]
   user_data       = var.cloudconfig_admin
 
   network {
@@ -106,7 +106,7 @@ resource "openstack_compute_instance_v2" "instance_webserver" {
   flavor_name = var.flavor_name_mini
   key_pair    = var.key_name
 
-  security_groups = ["${openstack_compute_secgroup_v2.SSH_internal.name}", "${openstack_compute_secgroup_v2.webserver.name}"]
+  security_groups = ["${openstack_networking_secgroup_v2.InternallyManaged.name}", "${openstack_networking_secgroup_v2.Webserver.name}"]
   user_data       = var.cloudconfig_webserver
 
   network {
@@ -119,7 +119,7 @@ resource "openstack_compute_instance_v2" "instance_conference" {
   image_name      = var.image_name_ubuntu
   flavor_name     = var.flavor_name_mini
   key_pair        = var.key_name
-  security_groups = ["${openstack_compute_secgroup_v2.SSH_internal.name}"]
+  security_groups = ["${openstack_networking_secgroup_v2.InternallyManaged.name}"]
   user_data       = var.cloudconfig_conference
 
   network {
